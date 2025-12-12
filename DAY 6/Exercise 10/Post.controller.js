@@ -1,5 +1,5 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
+    "zdemo/zfreestylepo00/controller/BaseController",
     "sap/ui/model/json/JSONModel",
     "sap/m/MessageBox"
 ], (Controller, JSONModel, MessageBox) => {
@@ -94,7 +94,6 @@ sap.ui.define([
         prepareJSONPost: function(){
             debugger;           
             var aPostData = this.getView().getModel("mPostData").getProperty("/"),
-                oToken = this.getView().getModel().getHttpHeaders()["X-CSRF-Token"],
                 sPath = "/sap/opu/odata4/sap/zsb_purchaseorder_00_v4/srvd/sap/zsd_purchaseorder_00/0001/ZC_PurchaseOrderHead00_S01/com.sap.gateway.srvd.zsd_purchaseorder_00.v0001.CreatePO";
 
             this._oBody = {
@@ -120,8 +119,10 @@ sap.ui.define([
                                         });
             }
 
-            this.postODataV4(sPath, oToken, this._oBody, this._onPostSuccess, this._onPostError, this);
-
+            this.getView().getModel().securityTokenAvailable().then(
+                function (sToken) {
+                    this.postODataV4(sPath, sToken, this._oBody, this._onPostSuccess, this._onPostError, this);
+                }.bind(this));
         },
 
         postODataV4: function(sPath, tToken, objJSON, fnSuccess, fnError, that) {
