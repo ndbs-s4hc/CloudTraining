@@ -1,11 +1,16 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller"
+    "zdemo/zfreestylepo00/controller/BaseController"
 ], (Controller) => {
     "use strict";
 
     return Controller.extend("zdemo.zfreestylepo00.controller.List", {
         onInit() {
             this.getRouter().getRoute("ListRO").attachPatternMatched(this._onPatternMatched, this);
+
+        },
+
+        _onPatternMatched: function(oEvent){
+            debugger;
 
         },
 
