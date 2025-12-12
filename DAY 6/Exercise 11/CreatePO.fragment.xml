@@ -1,0 +1,103 @@
+<core:FragmentDefinition
+	xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:uxap="sap.uxap"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    >
+	<Dialog
+	core:require="{handler: 'zdemo/zdemopo00/ext/controller/ExtensionController'}"
+		id="dl-current"
+        title="Create Purchase Order"
+        class="sapUiPopupWithPadding"		
+		horizontalScrolling="false"
+        contentWidth="500px" >
+		<content>
+        <VBox>
+            <FlexBox class="sapUiSmallMargin" alignItems="Start" renderType="Bare">
+                <Label width="100%" text="CompanyCode:" >
+                    <layoutData>
+                        <FlexItemData growFactor="1" baseSize="0"/>
+                    </layoutData>
+                </Label>
+                <Text text="{mPostData>/CompanyCode}">
+                    <layoutData>
+                        <FlexItemData growFactor="1" baseSize="0"/>
+                    </layoutData>
+                </Text>                        
+            </FlexBox>
+            <FlexBox class="sapUiSmallMargin" alignItems="Start" renderType="Bare">
+                <Label width="100%" text="Supplier:">
+                    <layoutData>
+                        <FlexItemData growFactor="1" baseSize="0"/>
+                    </layoutData>
+                </Label>
+                <Text text="{mPostData>/Supplier}">
+                    <layoutData>
+                        <FlexItemData growFactor="1" baseSize="0"/>
+                    </layoutData>
+                </Text>                        
+            </FlexBox>			
+        </VBox>
+        <VBox alignItems="End">
+                                        <Button 
+                                            text="Add Item" 
+                                            icon="sap-icon://add"
+                                            press="handler.onAddItem"
+                                            class="sapUiSmallMarginBottom" />                                  
+                                        <Table
+                                            items="{mPostData>/Items}"
+                                            growing="true"
+                                            contextualWidth="Auto"
+                                            mode="None"
+                                            noDataText="No Item to Display"
+                                            autoPopinMode="true"
+                                            width="100%">
+
+                                            <columns>
+                                                <Column width="25px" hAlign="Center">
+                                                    <Text text="Plant" />
+                                                </Column>
+                                                <Column width="80px" hAlign="Center">
+                                                    <Text text="Material" />
+                                                </Column>
+                                                <Column width="30px" hAlign="Center">
+                                                    <Text text="Quantity" />
+                                                </Column>
+                                                <Column width="50px" hAlign="Center">
+                                                    <Text text="NetAmount" />
+                                                </Column>
+                                            </columns>
+
+
+                                            <items>
+                                                <ColumnListItem>
+                                                    <cells>
+                                                        <Input  type="Text"
+                                                                class="sapUiInput" textAlign="Center"
+                                                                value="{mPostData>Plant}" />
+                                                        <Input  type="Text"
+                                                                class="sapUiInput" textAlign="Begin"
+                                                                value="{mPostData>Material}" />
+                                                        <Input  type="Number"
+                                                                class="sapUiInput" textAlign="Right"
+                                                                value="{mPostData>OrderQuantity}" />
+                                                        <Input  type="Number"
+                                                                class="sapUiInput" textAlign="Right"
+                                                                value="{mPostData>NetAmount}" />
+                                                    </cells>
+                                                </ColumnListItem>
+                                            </items>
+
+                                        </Table>
+                                    </VBox>
+		</content>
+		<beginButton>
+            <Button text="Cancel" press="handler.onCancel" />			
+		</beginButton>
+		<endButton>
+			<Button text="Post" type="Accept" press="handler.onPost" />
+		</endButton>
+    </Dialog>
+
+</core:FragmentDefinition>
