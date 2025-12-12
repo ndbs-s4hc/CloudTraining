@@ -1,0 +1,154 @@
+{
+  "_version": "1.73.1",
+  "sap.app": {
+    "id": "zdemo.zfreestylepo00",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.20.0",
+      "toolsId": "95d685c3-dfde-449a-856f-5223ad526d4d"
+    },
+    "dataSources": {
+      "ZSB_PURCHASEORDER_V2_VAN": {
+        "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZSB_PURCHASEORDER_V2_VAN',Version='0001')/$value/",
+        "type": "ODataAnnotation",
+        "settings": {
+          "localUri": "localService/mainService/ZSB_PURCHASEORDER_V2_VAN.xml"
+        }
+      },
+      "mainService": {
+        "uri": "/sap/opu/odata/sap/ZSB_PURCHASEORDER_V2/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "ZSB_PURCHASEORDER_V2_VAN"
+          ],
+          "localUri": "localService/mainService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "PurchaseOrder-ZFREESTYLEPO00": {
+          "semanticObject": "PurchaseOrder",
+          "action": "ZFREESTYLEPO00",
+          "title": "{{PurchaseOrder-ZFREESTYLEPO00.flpTitle}}",
+          "subTitle": "{{PurchaseOrder-ZFREESTYLEPO00.flpSubtitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.136.11",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "zdemo.zfreestylepo00.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {}
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "transition": "slide",
+        "type": "View",
+        "viewType": "XML",
+        "path": "zdemo.zfreestylepo00.view",
+        "async": true,
+        "viewPath": "zdemo.zfreestylepo00.view"
+      },
+      "routes": [
+        {
+          "name": "ListRO",
+          "pattern": ":?query:",
+          "target": [
+            "TargetListRO"
+          ]
+        },
+        {
+          "name": "PostRO",
+          "pattern": "PostRO",
+          "target": [
+            "TargetPostRO"
+          ]
+        }
+      ],
+      "targets": {
+        "TargetListRO": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "id": "List",
+          "name": "List"
+        },
+        "TargetPostRO": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Post",
+          "viewName": "Post"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "zdemo.zfreestylepo00.view.App",
+      "type": "XML",
+      "id": "App",
+      "async": true
+    }
+  }
+}
