@@ -1,0 +1,60 @@
+<mvc:View controllerName="zdemo.zfreestylepo00.controller.List"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <Page id="page" title="{i18n>title}">
+            <smartFilterBar:SmartFilterBar
+                id="smartFilterBar"
+                liveMode="false"
+                entitySet="ZC_PurchaseOrderHead_Freestyle"
+                persistencyKey="SmartFilter_Explored"
+                visible="true"
+                filterBarExpanded="true"
+                useToolbar="false"
+            >
+            </smartFilterBar:SmartFilterBar>
+            <smartTable:SmartTable
+                id="LineItemsSmartTable"
+                smartFilterId="smartFilterBar"
+                entitySet="ZC_PurchaseOrderHead_Freestyle"
+                tableType="Table"
+                useVariantManagement="true"
+                showRowCount="true"
+                persistencyKey="SmartTableAnalytical_Explored"
+                enableAutoBinding="true"
+                enableAutoColumnWidth="true"
+                header="All"
+            >
+            
+                <smartTable:layoutData>
+                    <FlexItemData
+                        growFactor="1"
+                        baseSize="0%"
+                    />
+                </smartTable:layoutData>
+
+                <Table
+                    id="mTable"
+                    mode="SingleSelectMaster"
+                    growing="true"
+                    selectionChange="onSelectionChange"
+                >         
+                </Table>
+
+            </smartTable:SmartTable>
+            <footer>
+                <OverflowToolbar>
+                    <ToolbarSpacer/>
+                    <Button 
+                            text="Create Purchase Order" 
+                            icon="sap-icon://add"
+                            press="onCreatePO"
+                        />
+                </OverflowToolbar>
+            </footer>
+    </Page>    
+</mvc:View>
