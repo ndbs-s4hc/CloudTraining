@@ -1,0 +1,131 @@
+<mvc:View
+    controllerName="zdemo.zfreestylepo00.controller.Post"
+    xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:uxap="sap.uxap"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+>
+    <Page
+        showNavButton="true"
+        title="Back"
+        navButtonPress="onNavBack"
+        id="pageIdPost"
+    >	
+        <content>
+             <uxap:ObjectPageLayout id="objPageLayout1" class="sapUiSizeCompact">
+                <uxap:headerTitle>
+                    <uxap:ObjectPageDynamicHeaderTitle id="opDynHeaderTitle">
+                        <uxap:expandedHeading>
+                        </uxap:expandedHeading>
+                        <uxap:snappedHeading>
+                        </uxap:snappedHeading>
+                    </uxap:ObjectPageDynamicHeaderTitle>
+                </uxap:headerTitle>
+                <uxap:headerContent>
+                    <FlexBox class="sapUiSmallMargin" alignItems="Start" renderType="Bare">
+                        <Label width="100%" text="CompanyCode:" labelFor="txCompanyCode">
+                            <layoutData>
+                                <FlexItemData growFactor="1" baseSize="0"/>
+                            </layoutData>
+                        </Label>
+                        <Text id="txCompanyCode" text="{mPostData>/CompanyCode}">
+                            <layoutData>
+                                <FlexItemData growFactor="1" baseSize="0"/>
+                            </layoutData>
+                        </Text>                        
+                    </FlexBox>
+                    <FlexBox class="sapUiSmallMargin" alignItems="Start" renderType="Bare">
+                        <Label width="100%" text="Supplier:" labelFor="txSupplier">
+                            <layoutData>
+                                <FlexItemData growFactor="1" baseSize="0"/>
+                            </layoutData>
+                        </Label>
+                        <Text id="txSupplier" text="{mPostData>/Supplier}">
+                            <layoutData>
+                                <FlexItemData growFactor="1" baseSize="0"/>
+                            </layoutData>
+                        </Text>                        
+                    </FlexBox>
+                </uxap:headerContent>
+                <uxap:sections>
+                    <uxap:ObjectPageSection
+                        id="objPageSection2"
+                        title="Items"
+                        class="sapUiNoMargin"
+                        titleUppercase="false"
+                        showTitle="false">                                    
+                        <uxap:subSections>                 
+                            <uxap:ObjectPageSubSection
+                                id="objPageSubSection2"
+                                title="Purchase Order Items"
+                                titleUppercase="false">
+                                <uxap:blocks>
+                                    <VBox id="vbBlocks" alignItems="End">
+                                        <Button 
+                                            text="Add Item" 
+                                            icon="sap-icon://add"
+                                            press="onAddItem"
+                                            class="sapUiSmallMarginBottom" />                                    
+                                        <Table
+                                            items="{mPostData>/Items}"
+                                            growing="true"
+                                            contextualWidth="Auto"
+                                            mode="None"
+                                            noDataText="No Item to Display"
+                                            autoPopinMode="true"
+                                            width="100%">
+
+                                            <columns>
+                                                <Column width="25px" hAlign="Center">
+                                                    <Text text="Plant" />
+                                                </Column>
+                                                <Column width="80px" hAlign="Center">
+                                                    <Text text="Material" />
+                                                </Column>
+                                                <Column width="30px" hAlign="Center">
+                                                    <Text text="Quantity" />
+                                                </Column>
+                                                <Column width="50px" hAlign="Center">
+                                                    <Text text="NetAmount" />
+                                                </Column>
+                                            </columns>
+
+
+                                            <items>
+                                                <ColumnListItem>
+                                                    <cells>
+                                                        <Input  id="inpPlant" type="Text"
+                                                                class="sapUiInput" textAlign="Center"
+                                                                value="{mPostData>Plant}" />
+                                                        <Input  id="inpMaterial" type="Text"
+                                                                class="sapUiInput" textAlign="Begin"
+                                                                value="{mPostData>Material}" />
+                                                        <Input  id="inpOrderQuantity" type="Number"
+                                                                class="sapUiInput" textAlign="Right"
+                                                                value="{mPostData>OrderQuantity}" />
+                                                        <Input  id="inpNetAmount" type="Number"
+                                                                class="sapUiInput" textAlign="Right"
+                                                                value="{mPostData>NetAmount}" />
+                                                    </cells>
+                                                </ColumnListItem>
+                                            </items>
+
+                                        </Table>
+                                    </VBox>
+                                </uxap:blocks>
+                            </uxap:ObjectPageSubSection>
+                        </uxap:subSections>
+                    </uxap:ObjectPageSection>
+                </uxap:sections>
+            </uxap:ObjectPageLayout>
+        </content>
+        <footer>
+            <OverflowToolbar>
+                <ToolbarSpacer/>
+                <Button id="btnPost" type="Accept" text="Post" press="onPostData" />
+            </OverflowToolbar>
+        </footer>
+
+    </Page>
+</mvc:View>
